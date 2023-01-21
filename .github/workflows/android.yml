@@ -30,7 +30,7 @@ jobs:
         git push
 
   build-debug:
-  needs: update-leveldb
+    needs: update-leveldb
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
