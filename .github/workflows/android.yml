@@ -16,7 +16,7 @@ jobs:
           git submodule update --remote --merge
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
-          git commit -am "CI: Update leveldb-mcpe"
+          git diff --exit-code || git commit -am "CI: Update leveldb-mcpe"
           git push
 
   build-debug:
