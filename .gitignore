@@ -63,7 +63,6 @@ captures/
 .idea
 
 # Keystore files
-*.jks
 keystore.properties
 
 # Firebase configuration

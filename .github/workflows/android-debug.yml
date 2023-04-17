@@ -1,4 +1,4 @@
-name: Android CI
+name: Android CI Debug
 
 on:
   pull_request:
@@ -42,7 +42,7 @@ jobs:
           name: app-debug
           path: out/app-debug.apk
 
-  build-release:
+  build-debug-noprefix:
     needs: update-leveldb
     runs-on: ubuntu-20.04
     steps:
@@ -57,10 +57,10 @@ jobs:
       run: |
         ./gradlew :app:assembleRelease
         mkdir -p out
-        mv app/build/outputs/apk/release/app-release.apk out/app-release.apk
+        mv app/build/outputs/apk/release/app-debug-noprefix.apk out/app-debug-noprefix.apk
         
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
-          name: app-release
-          path: out/app-release.apk
+          name: app-debug-noprefix
+          path: out/app-debug-noprefix.apk

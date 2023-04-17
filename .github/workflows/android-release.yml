@@ -1,0 +1,40 @@
+name: Android CI Gplay
+
+jobs:
+  update-leveldb:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update leveldb-mcpe
+        run: |
+          git submodule init
+          git submodule update --remote --merge
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git config --global user.name "github-actions"
+          git diff --exit-code || git commit -am "CI: Update leveldb-mcpe"
+          git push
+
+  build-gplay:
+    needs: update-leveldb
+    runs-on: ubuntu-20.04
+    env:
+      GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+
+    - name: Build Gplay .apk
+      run: |
+        ./gradlew :app:assembleGplay
+        mkdir -p out
+        mv app/build/outputs/apk/gplay/app-gplay.apk out/app-gplay.apk
+        
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+          name: app-gplay
+          path: out/app-gplay.apk
