@@ -69,6 +69,7 @@ LOCAL_SRC_FILES         := \
         leveldb-mcpe/util/hash.cc                   leveldb-mcpe/util/histogram.cc\
         leveldb-mcpe/util/logging.cc                leveldb-mcpe/util/options.cc\
         leveldb-mcpe/util/status.cc                 leveldb-mcpe/util/win_logger.cc\
-        leveldb-mcpe/port/port_posix.cc             leveldb-mcpe/port/port_posix_sse.cc
+        leveldb-mcpe/port/port_posix.cc             leveldb-mcpe/port/port_posix_sse.cc\
+        leveldb-mcpe/db/builder.cc
 
 include $(BUILD_STATIC_LIBRARY)
